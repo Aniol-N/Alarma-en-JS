@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reloj Web 🤨☝️⏰</title>
-    <script src="Alarma.js" defer></script>
+    <!-- Importante: type="module" para poder usar import/export -->
+    <script src="AlarmaController.js" type="module" defer></script>
 </head>
 <body>
     <h1>Alarma Web ⏰</h1>
-    <label for="alarmTime">Establecer hora de alarma:</label>
-    <input type="time" id="alarmTime">
-    <button id="setAlarmBtn">Establecer Alarma</button>
-    <button id="clearAlarmBtn">Borrar Alarma</button>
+    <label for="alarmTimeInput">Establecer hora:</label>
+    <input type="time" id="alarmTimeInput">
+    
+    <!-- Llamamos a las funciones de window -->
+    <button onclick="establecerAlarma()">Establecer Alarma</button>
+    <button onclick="borrarAlarma()">Borrar Alarma</button>
+
     <p id="status"></p>
 
+    <!-- Un ID diferente para el contenedor -->
+    <div id="displayAlarma"></div>
 </body>
 </html>
