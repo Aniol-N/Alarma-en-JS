@@ -1,6 +1,10 @@
 export class Alarma {
+    // Static counter para generar IDs únicos
+    static _nextId = 0;
+
     // constructor
     constructor(title, hour, minute, second, audio) {
+        this.id = Alarma._nextId++;
         this.setTitle(title);
         this.setHour(hour);
         this.setMinute(minute);
@@ -29,6 +33,9 @@ export class Alarma {
     }
 
     // getters
+    getId() {
+        return this.id;
+    }
     getTitle() {
         return this._title;
     }
@@ -52,10 +59,13 @@ export class Alarma {
     }
 
     makeHTML() {
+        console.log("Generando HTML para alarma ID: " + this.getId());
         return `<div class="alarma">
                     <h3>${this.getTitle()}</h3> 
                     <p>Hora: ${this.getTime()}</p>
-                    <audio src="${this.getAudio()}" controls></audio>
+                    <p>Audio name: ${this.getAudio()}</p>
+                    <audio src="${this.getAudio()}"></audio>
+                    <button onclick="borrarAlarmaIndividual(${this.getId()})">Borrar esta alarma</button>
                 </div>`;
     }
 }
