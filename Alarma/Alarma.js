@@ -60,12 +60,19 @@ export class Alarma {
 
     makeHTML() {
         console.log("Generando HTML para alarma ID: " + this.getId());
-        return `<div class="alarma">
-                    <h3>${this.getTitle()}</h3> 
-                    <p>Hora: ${this.getTime()}</p>
-                    <p>Audio name: ${this.getAudio()}</p>
-                    <audio src="${this.getAudio()}"></audio>
-                    <button onclick="borrarAlarmaIndividual(${this.getId()})">Borrar esta alarma</button>
+        return `<div class="alarma card shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between">
+                            <div>
+                                <h3 class="h6 mb-1">${this.getTitle()}</h3>
+                                <div class="text-muted small">Hora: ${this.getTime()}</div>
+                                <div class="text-muted small">Audio: ${this.getAudio()}</div>
+                                <div class="text-muted small">Activa: ${this.getActive() ? "Sí" : "No"}</div>
+                                <audio src="${this.getAudio()}"></audio>
+                            </div>
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.getId()})">Borrar</button>
+                        </div>
+                    </div>
                 </div>`;
     }
 }

@@ -3,30 +3,66 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Reloj Web 🤨☝️⏰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alarma Web</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Importante: type="module" para poder usar import/export -->
     <script src="AlarmaController.js" type="module" defer></script>
 </head>
 
 <body>
-    <h1>Alarma Web ⏰</h1>
-    <form id="alarmForm">
-        <label for="alarmTitleInput">Titulo de la alarma:</label>
-        <input type="text" id="alarmTitleInput" placeholder="Título de la alarma" required>
-        
-        <label for="alarmTimeInput">Establecer hora:minuto:segundo :</label>
-        <input type="number" id="alarmHourInput" placeholder="HH" min="0" max="23" required>
-        <input type="number" id="alarmMinuteInput" placeholder="MM" min="0" max="59" required>
-        <input type="number" id="alarmSecondInput" placeholder="SS" min="0" max="59" required>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h1 class="h3 mb-0">Alarma Web</h1>
+                </div>
 
-        <button type="submit">Establecer nueva alarma</button>
-    </form>
-    <button onclick="borrarAlarma()">Borrar todas las alarmas</button>
+                <div class="card shadow-sm mb-3">
+                    <div class="card-body">
+                        <form id="alarmForm" class="row g-3">
+                            <div class="col-12">
+                                <label for="alarmTitleInput" class="form-label">Titulo de la alarma</label>
+                                <input type="text" id="alarmTitleInput" class="form-control" placeholder="Titulo de la alarma" required>
+                            </div>
 
-    <p id="status"></p>
+                            <div class="col-12">
+                                <label class="form-label">Hora</label>
+                                <div class="row g-2">
+                                    <div class="col-4">
+                                        <input type="number" id="alarmHourInput" class="form-control" placeholder="HH" min="0" max="23" required>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="number" id="alarmMinuteInput" class="form-control" placeholder="MM" min="0" max="59" required>
+                                    </div>
+                                    <div class="col-4">
+                                        <input type="number" id="alarmSecondInput" class="form-control" placeholder="SS" min="0" max="59" required>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Un ID diferente para el contenedor -->
-    <div id="displayAlarma"></div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input type="checkbox" id="alarmActiveInput" class="form-check-input" checked>
+                                    <label for="alarmActiveInput" class="form-check-label">Alarma activa</label>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Establecer nueva alarma</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="borrarAlarma()">Borrar todas</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="status" class="text-muted small mb-3"></div>
+
+                <!-- Un ID diferente para el contenedor -->
+                <div id="displayAlarma" class="d-grid gap-3"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
