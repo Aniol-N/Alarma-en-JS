@@ -67,7 +67,7 @@ export class Alarma {
                                 <h3 class="h6 mb-1">${this.getTitle()}</h3>
                                 <div class="text-muted small">Hora: ${this.getTime()}</div>
                                 <div class="text-muted small">Audio: ${this.getAudio()}</div>
-                                <div class="text-muted small">Activa: ${this.getActive() ? "Sí" : "No"}</div>
+                                <div class="text-muted small">Activa: ${this.getActive() ? 'Sí' : 'No'}</div>
                                 <audio src="${this.getAudio()}"></audio>
                             </div>
                             <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.getId()})">Borrar</button>
