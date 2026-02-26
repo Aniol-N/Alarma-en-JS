@@ -23,21 +23,34 @@
                         <form id="alarmForm" class="row g-3">
                             <div class="col-12">
                                 <label for="alarmTitleInput" class="form-label">Titulo de la alarma</label>
-                                <input type="text" id="alarmTitleInput" class="form-control" placeholder="Titulo de la alarma" required>
+                                <input type="text" id="alarmTitleInput" class="form-control"
+                                    placeholder="Titulo de la alarma" required>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Hora</label>
                                 <div class="row g-2">
                                     <div class="col-4">
-                                        <input type="number" id="alarmHourInput" class="form-control" placeholder="HH" min="00" max="23" required>
+                                        <input type="number" id="alarmHourInput" class="form-control" placeholder="HH"
+                                            min="00" max="23" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="number" id="alarmMinuteInput" class="form-control" placeholder="MM" min="00" max="59" required>
+                                        <input type="number" id="alarmMinuteInput" class="form-control" placeholder="MM"
+                                            min="00" max="59" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="number" id="alarmSecondInput" class="form-control" placeholder="SS" min="00" max="59" required>
+                                        <input type="number" id="alarmSecondInput" class="form-control" placeholder="SS"
+                                            min="00" max="59" required>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-audio-selector">
+                                    <label for="audioSelectInput" class="form-select-label">Sound</label>
+                                    <select id="audioSelectInput" name="audio" class="form-select-input">
+                                        <option value="" src=".\sound 1.mp3">sound 1</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -50,7 +63,8 @@
 
                             <div class="col-12 d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">Establecer nueva alarma</button>
-                                <button type="button" class="btn btn-outline-secondary" onclick="borrarAlarma()">Borrar todas</button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="borrarAlarma()">Borrar
+                                    todas</button>
                             </div>
                         </form>
                     </div>

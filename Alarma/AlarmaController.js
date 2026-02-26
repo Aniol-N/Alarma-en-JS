@@ -44,15 +44,16 @@ function agregarFormateoHora(inputs) {
 
 // ========== LÓGICA DE ALARMAS ==========
 function obtenerValoresFormulario() {
-    const { alarmTitleInput, alarmHourInput, alarmMinuteInput, alarmSecondInput, alarmActiveInput } = 
-        obtenerElementosPorId('alarmTitleInput', 'alarmHourInput', 'alarmMinuteInput', 'alarmSecondInput', 'alarmActiveInput');
+    const { alarmTitleInput, alarmHourInput, alarmMinuteInput, alarmSecondInput, alarmActiveInput, audioSelectInput } = 
+        obtenerElementosPorId('alarmTitleInput', 'alarmHourInput', 'alarmMinuteInput', 'alarmSecondInput', 'alarmActiveInput', 'audioSelectInput');
     
     return {
         titulo: alarmTitleInput.value,
         hora: formatTime(alarmHourInput.value),
         minuto: formatTime(alarmMinuteInput.value),
         segundo: formatTime(alarmSecondInput.value),
-        activa: alarmActiveInput.checked
+        activa: alarmActiveInput.checked,
+        audio: audioSelectInput.value
     };
 }
 
@@ -78,14 +79,14 @@ function calcularTiempoHastaAlarma(hora, minuto, segundo) {
 }
 
 function establecerAlarma() {
-    const { titulo, hora, minuto, segundo, activa } = obtenerValoresFormulario();
+    const { titulo, hora, minuto, segundo, activa, audio } = obtenerValoresFormulario();
 
     if (verificarHoraRepetida(hora, minuto, segundo)) {
         mostrarMensaje("Ya existe una alarma a esa hora", 'error');
         return;
     }
 
-    const nuevaAlarma = new Alarma(titulo, hora, minuto, segundo, "(hardcoded)alarm.mp3");
+    const nuevaAlarma = new Alarma(titulo, hora, minuto, segundo, audio);
     appState.alarmas.set(nuevaAlarma.id, nuevaAlarma);
 
     const milisegundos = calcularTiempoHastaAlarma(hora, minuto, segundo);
