@@ -4,12 +4,13 @@ export class Alarma {
 
     // constructor
     constructor(title, hour, minute, second, audio) {
-        this.id = Alarma._nextId++;
-        this.title = title;
-        this.hour = hour;
-        this.minute = minute;
-        this.second = second;
-        this.audio = audio;
+        this._id = Alarma._nextId++;
+        this._title = title;
+        this._hour = hour;
+        this._minute = minute;
+        this._second = second;
+        this._audio = audio;
+        this._active = true;
     }
 
     // setters
@@ -34,7 +35,7 @@ export class Alarma {
 
     // getters
     get id() {
-        return this.id;
+        return this._id;
     }
     get title() {
         return this._title;
@@ -54,18 +55,18 @@ export class Alarma {
     get active() {
         return this._active;
     }
-    getTime() {
+    get time() {
         return this._hour + ":" + this._minute + ":" + this._second;
     }
 
     makeHTML() {
-        console.log("Generando HTML para alarma ID: " + this.Id);
+        console.log("Generando HTML para alarma ID: " + this.id);
         return `<div class="alarma card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
                                 <h3 class="h6 mb-1">${this.title}</h3>
-                                <div class="text-muted small">Hora: ${this.getTime()}</div>
+                                <div class="text-muted small">Hora: ${this.time}</div>
                                 <div class="text-muted small">Audio: ${this.audio}</div>
                                 <div class="text-muted small">Activa: ${this.active ? 'Sí' : 'No'}</div>
                                 <audio src="${this.audio}"></audio>

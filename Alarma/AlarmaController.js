@@ -59,7 +59,7 @@ function obtenerValoresFormulario() {
 
 function verificarHoraRepetida(hora, minuto, segundo) {
     for (const alarma of appState.alarmas.values()) {
-        if (alarma.getHour() === hora && alarma.getMinute() === minuto && alarma.getSecond() === segundo) {
+        if (alarma.hour === hora && alarma.minute === minuto && alarma.second === segundo) {
             return true;
         }
     }
@@ -92,11 +92,11 @@ function establecerAlarma() {
     const milisegundos = calcularTiempoHastaAlarma(hora, minuto, segundo);
 
     const id = setTimeout(() => {
-        alert("¡Alarma! ⏰ Son las " + nuevaAlarma.getTime());
+        alert("¡Alarma! ⏰ Son las " + nuevaAlarma.time);
     }, milisegundos);
 
     appState.timeouts.set(nuevaAlarma.id, id);
-    nuevaAlarma.setActive(activa);
+    nuevaAlarma.active = activa;
 
     renderizarAlarmas();
     mostrarMensaje("Alarma añadida correctamente", 'success');
