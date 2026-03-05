@@ -5,53 +5,53 @@ export class Alarma {
     // constructor
     constructor(title, hour, minute, second, audio) {
         this.id = Alarma._nextId++;
-        this.setTitle(title);
-        this.setHour(hour);
-        this.setMinute(minute);
-        this.setSecond(second);
-        this.setAudio(audio);
+        this.Title = title;
+        this.Hour = hour;
+        this.Minute = minute;
+        this.Second = second;
+        this.Audio = audio;
     }
 
     // setters
-    setTitle(title) {
+    set Title(title) {
         this._title = title;
     }
-    setHour(hour) {
+    set Hour(hour) {
         this._hour = hour;
     }
-    setMinute(minute) {
+    set Minute(minute) {
         this._minute = minute;
     }
-    setSecond(second) {
+    set Second(second) {
         this._second = second;
     }
-    setAudio(audio) {
+    set Audio(audio) {
         this._audio = audio;
     }
-    setActive(active) {
+    set Active(active) {
         this._active = active;
     }
 
     // getters
-    getId() {
+    get Id() {
         return this.id;
     }
-    getTitle() {
+    get Title() {
         return this._title;
     }
-    getHour() {
+    get Hour() {
         return this._hour;
     }
-    getMinute() {
+    get Minute() {
         return this._minute;
     }
-    getSecond() {
+    get Second() {
         return this._second;
     }
-    getAudio() {
+    get Audio() {
         return this._audio;
     }
-    getActive() {
+    get Active() {
         return this._active;
     }
     getTime() {
@@ -59,18 +59,18 @@ export class Alarma {
     }
 
     makeHTML() {
-        console.log("Generando HTML para alarma ID: " + this.getId());
+        console.log("Generando HTML para alarma ID: " + this.Id);
         return `<div class="alarma card shadow-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <h3 class="h6 mb-1">${this.getTitle()}</h3>
+                                <h3 class="h6 mb-1">${this.Title}</h3>
                                 <div class="text-muted small">Hora: ${this.getTime()}</div>
-                                <div class="text-muted small">Audio: ${this.getAudio()}</div>
-                                <div class="text-muted small">Activa: ${this.getActive() ? 'Sí' : 'No'}</div>
-                                <audio src="${this.getAudio()}"></audio>
+                                <div class="text-muted small">Audio: ${this.Audio}</div>
+                                <div class="text-muted small">Activa: ${this.Active ? 'Sí' : 'No'}</div>
+                                <audio src="${this.Audio}"></audio>
                             </div>
-                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.getId()})">Borrar</button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.Id})">Borrar</button>
                         </div>
                     </div>
                 </div>`;
