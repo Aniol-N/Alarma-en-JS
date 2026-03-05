@@ -5,53 +5,53 @@ export class Alarma {
     // constructor
     constructor(title, hour, minute, second, audio) {
         this.id = Alarma._nextId++;
-        this.Title = title;
-        this.Hour = hour;
-        this.Minute = minute;
-        this.Second = second;
-        this.Audio = audio;
+        this.title = title;
+        this.hour = hour;
+        this.minute = minute;
+        this.second = second;
+        this.audio = audio;
     }
 
     // setters
-    set Title(title) {
+    set title(title) {
         this._title = title;
     }
-    set Hour(hour) {
+    set hour(hour) {
         this._hour = hour;
     }
-    set Minute(minute) {
+    set minute(minute) {
         this._minute = minute;
     }
-    set Second(second) {
+    set second(second) {
         this._second = second;
     }
-    set Audio(audio) {
+    set audio(audio) {
         this._audio = audio;
     }
-    set Active(active) {
+    set active(active) {
         this._active = active;
     }
 
     // getters
-    get Id() {
+    get id() {
         return this.id;
     }
-    get Title() {
+    get title() {
         return this._title;
     }
-    get Hour() {
+    get hour() {
         return this._hour;
     }
-    get Minute() {
+    get minute() {
         return this._minute;
     }
-    get Second() {
+    get second() {
         return this._second;
     }
-    get Audio() {
+    get audio() {
         return this._audio;
     }
-    get Active() {
+    get active() {
         return this._active;
     }
     getTime() {
@@ -64,13 +64,13 @@ export class Alarma {
                     <div class="card-body">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <h3 class="h6 mb-1">${this.Title}</h3>
+                                <h3 class="h6 mb-1">${this.title}</h3>
                                 <div class="text-muted small">Hora: ${this.getTime()}</div>
-                                <div class="text-muted small">Audio: ${this.Audio}</div>
-                                <div class="text-muted small">Activa: ${this.Active ? 'Sí' : 'No'}</div>
-                                <audio src="${this.Audio}"></audio>
+                                <div class="text-muted small">Audio: ${this.audio}</div>
+                                <div class="text-muted small">Activa: ${this.active ? 'Sí' : 'No'}</div>
+                                <audio src="${this.audio}"></audio>
                             </div>
-                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.Id})">Borrar</button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.id})">Borrar</button>
                         </div>
                     </div>
                 </div>`;
