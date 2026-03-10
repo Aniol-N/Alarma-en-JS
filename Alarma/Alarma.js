@@ -11,6 +11,7 @@ export class Alarma {
         this._second = second;
         this._audio = audio;
         this._active = true;
+        this._timeoutId = null;
     }
 
     // setters
@@ -30,6 +31,23 @@ export class Alarma {
         this._audio = audio;
     }
     set active(active) {
+        this._active = active;
+    }
+    set timeoutId(timeoutId) {
+        this._timeoutId = timeoutId;
+    }
+    set time(time) {
+        const [hour, minute, second] = String(time).split(':');
+        this._hour = hour;
+        this._minute = minute;
+        this._second = second;
+    }
+    set alarmData({ title, hour, minute, second, audio, active }) {
+        this._title = title;
+        this._hour = hour;
+        this._minute = minute;
+        this._second = second;
+        this._audio = audio;
         this._active = active;
     }
 
@@ -55,8 +73,23 @@ export class Alarma {
     get active() {
         return this._active;
     }
+    get timeoutId() {
+        return this._timeoutId;
+    }
     get time() {
         return this._hour + ":" + this._minute + ":" + this._second;
+    }
+    get alarmData() {
+        return {
+            id: this._id,
+            title: this._title,
+            hour: this._hour,
+            minute: this._minute,
+            second: this._second,
+            time: this.time,
+            audio: this._audio,
+            active: this._active
+        };
     }
 
     makeHTML() {
@@ -71,7 +104,7 @@ export class Alarma {
                                 <div class="text-muted small">Activa: ${this.active ? 'Sí' : 'No'}</div>
                                 <audio src="${this.audio}"></audio>
                             </div>
-                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual(${this.id})">Borrar</button>
+                            <button class="btn btn-outline-danger btn-sm" onclick="borrarAlarmaIndividual('${this.time}')">Borrar</button>
                         </div>
                     </div>
                 </div>`;

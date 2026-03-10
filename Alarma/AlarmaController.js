@@ -2,7 +2,6 @@ import { Alarma } from "./Alarma.js";
 
 let appState = {
     alarmas: new Map(),
-    timeouts: new Map(),
     lema: "Gestor de Alarmas activo"
 };
 
@@ -58,12 +57,7 @@ function obtenerValoresFormulario() {
 }
 
 function verificarHoraRepetida(hora, minuto, segundo) {
-    for (const alarma of appState.alarmas.values()) {
-        if (alarma.hour === hora && alarma.minute === minuto && alarma.second === segundo) {
-            return true;
-        }
-    }
-    return false;
+    return appState.alarmas.has(hora + ":" + minuto + ":" + segundo);
 }
 
 function calcularTiempoHastaAlarma(hora, minuto, segundo) {
@@ -80,6 +74,7 @@ function calcularTiempoHastaAlarma(hora, minuto, segundo) {
 
 function establecerAlarma() {
     const { titulo, hora, minuto, segundo, activa, audio } = obtenerValoresFormulario();
+    const claveAlarma = hora + ":" + minuto + ":" + segundo;
 
     if (verificarHoraRepetida(hora, minuto, segundo)) {
         mostrarMensaje("Ya existe una alarma a esa hora", 'error');
@@ -87,15 +82,16 @@ function establecerAlarma() {
     }
 
     const nuevaAlarma = new Alarma(titulo, hora, minuto, segundo, audio);
-    appState.alarmas.set(nuevaAlarma.id, nuevaAlarma);
+    appState.alarmas.set(claveAlarma, nuevaAlarma);
 
     const milisegundos = calcularTiempoHastaAlarma(hora, minuto, segundo);
 
     const id = setTimeout(() => {
         alert("¡Alarma! ⏰ Son las " + nuevaAlarma.time);
+        nuevaAlarma.timeoutId = null;
     }, milisegundos);
 
-    appState.timeouts.set(nuevaAlarma.id, id);
+    nuevaAlarma.timeoutId = id;
     nuevaAlarma.active = activa;
 
     renderizarAlarmas();
@@ -117,28 +113,32 @@ function mostrarMensaje(mensaje, tipo = 'success') {
         statusElement.style.setProperty('color', '#28a745', 'important'); 
     }
 
-    setInterval(() => {
+    setTimeout(() => {
         statusElement.innerText = "";
-    }, 2000);
+    }, 3000);
 }
 // ========== ELIMINACIÓN DE ALARMAS ==========
-function cancelarTimeout(alarmaId) {
-    const timeoutId = appState.timeouts.get(alarmaId);
-    if (timeoutId) {
-        clearTimeout(timeoutId);
-        appState.timeouts.delete(alarmaId);
+function cancelarTimeout(alarmaKey) {
+    const alarma = appState.alarmas.get(alarmaKey);
+    if (alarma?.timeoutId) {
+        clearTimeout(alarma.timeoutId);
+        alarma.timeoutId = null;
     }
 }
 
-function eliminarAlarmaDelEstado(alarmaId) {
-    cancelarTimeout(alarmaId);
-    appState.alarmas.delete(alarmaId);
+function eliminarAlarmaDelEstado(alarmaKey) {
+    cancelarTimeout(alarmaKey);
+    appState.alarmas.delete(alarmaKey);
 }
 
 window.borrarAlarma = function () {
-    appState.timeouts.forEach(id => clearTimeout(id));
+    appState.alarmas.forEach(alarma => {
+        if (alarma.timeoutId) {
+            clearTimeout(alarma.timeoutId);
+            alarma.timeoutId = null;
+        }
+    });
     appState.alarmas = new Map();
-    appState.timeouts = new Map();
     renderizarAlarmas();
     mostrarMensaje("Todas las alarmas han sido borradas", 'success');
 };
